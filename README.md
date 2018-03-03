@@ -16,10 +16,11 @@ $ npm install --save starbot-store-mongo
 const StoreRedis = require('starbot-store-mongo');
 
 const store = new StoreMongo({
-  url: 'mongodb://localhost:27017/dbName',
+  url: 'mongodb://localhost:27017',
   options: {
     sslValidate: true,
   },
+  db: 'dbBot',
   collection: 'bot1',
 });
 ```

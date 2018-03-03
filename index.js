@@ -1,6 +1,6 @@
 'use strict';
 
-const redis = require('mongodb');
+const mongo = require('mongodb');
 
 /**
  * The module uses redis to store state
@@ -11,35 +11,51 @@ class StarbotStoreMongo {
    * Constructor
    * @param {Object} settings
    */
-  async constructor (settings) {
-    const { url, options, collection } = settings;
-    
-    this.db = await MongoClient.connect(url, options);
-    this.collection = this.db.collection(collection);
+  constructor (settings) {
+    const { url, options } = settings;
+
+    this.client = new mongo.MongoClient(url, options);
+    this.settings = settings;
+  }
+
+  async connect () {
+    const {
+      db,
+      collection
+    } = this.settings;
+
+    if (!this.client.isConnected(db)) {
+      await this.client.connect();
+      this.collection = this.client.db(db).collection(collection);
+    }
   }
 
   /**
    * @param {String} key
    */
   async get (key) {
+    await this.connect();
+
     const doc = await this.collection.findOne({
-      key,
+      key
     });
 
-    return JSON.parse(doc.key);
+    return doc.value;
   }
 
   /**
-   * @param {String} key 
-   * @param {Object} value 
+   * @param {String} key
+   * @param {Object} value
    */
   async set (key, value) {
+    await this.connect();
+
     await this.collection.updateOne(
       { key },
-      { $set: { value } },
+      { $set: { value: value } },
       { upsert: true }
     );
   }
 }
 
-module.exports = StarbotStoreRedis;
+module.exports = StarbotStoreMongo;

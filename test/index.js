@@ -6,11 +6,13 @@ const Store = require('..');
 describe('Starbot Store', () => {
   it('set and get', async () => {
     let store1 = new Store({
-      url: 'mongodb://localhost:27017/dbName',
+      url: 'mongodb://localhost:27017/',
+      db: 'dbBot',
       collection: 'botName1'
     });
     let store2 = new Store({
-      url: 'mongodb://localhost:27017/dbName',
+      url: 'mongodb://localhost:27017/',
+      db: 'dbBot',
       collection: 'botName2'
     });
 
@@ -26,10 +28,11 @@ describe('Starbot Store', () => {
     state2.should.equal('bar2');
     state3.should.equal('bar3');
   });
-  it('JSON parse', async () => {
+  it('JSON', async () => {
     let store = new Store({
-      url: 'mongodb://localhost:27017/dbName',
-      collectionName: 'botName1'
+      url: 'mongodb://localhost:27017/',
+      db: 'dbBot',
+      collection: 'botName1'
     });
 
     await store.set('user1', { key: 1, bar: 'foo' });
