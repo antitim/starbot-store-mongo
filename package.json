@@ -1,6 +1,6 @@
 {
   "name": "starbot-store-mongo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Store Mongo for Starbot",
   "author": {
     "name": "antitim",

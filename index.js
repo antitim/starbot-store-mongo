@@ -3,7 +3,7 @@
 const mongo = require('mongodb');
 
 /**
- * The module uses redis to store state
+ * The module uses mongo to store state
  * @class
  */
 class StarbotStoreMongo {

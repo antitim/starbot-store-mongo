@@ -1,4 +1,4 @@
-# starbot-store-redis [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+# starbot-store-mongo [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 ## About
 
@@ -13,7 +13,7 @@ $ npm install --save starbot-store-mongo
 ## Options
 
 ```js
-const StoreRedis = require('starbot-store-mongo');
+const StoreMongo = require('starbot-store-mongo');
 
 const store = new StoreMongo({
   url: 'mongodb://localhost:27017',
